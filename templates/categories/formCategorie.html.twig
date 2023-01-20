@@ -1,0 +1,13 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}
+  Formulaire Categorie
+{% endblock %}
+{% block content %}
+  {% if app.request.get('id') %}
+    <h1>Mise a jour d'une categorie</h1>
+  {% else %}
+    <h1>Ajout d'une categorie</h1>
+  {% endif %}
+  {{ form(formCategorie) }}
+{% endblock %}

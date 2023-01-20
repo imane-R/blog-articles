@@ -1,0 +1,53 @@
+ - Pour cet exercice vous allez créer une copie de votre projet "blogExo" et vous exercer la dessus.
+
+- créez une entité "Auteur" avec les propritées suivantes :
+                    - nom (string, 100, not null)
+                    - prenom (string, 100, not null)
+                    - dateDeNaissance (date, not null)
+                    - biographie (text, not null)
+
+- créez le fichier de migration puis executer là (vérifiez que votre table auteur est créé dans votre bdd)
+
+-  créez un controller pour Auteur et faire les traitement suivant :
+                    - créez un fomulaire pour l'ajout d'auteurs , faire le traitement dans une methode  dans le controller puis l'afficher dans une page twig
+                    - ajoutez quelques auteurs dans votre bdd 
+                    - créez une nouvelle methode qui permet de recuperer la liste des auteurs pour l'afficher sur une page twig dans un table (nom, prenom , action (voir,modifier,supprimer) )
+                    - créez une methode qui vous permet de recuyperer un auteur pour afficher ses informations dans une page twig en passant par le boutton voir de la page précedente
+                    - créez une methode qui permet de modifier un auteur via un formualire en passant par le boutton modifier de la page du tableau 
+                    - créez une methode qui permet de supprimer un auteur via le boutton supprimer du tableau
+
+
+
+
+création d'une entité : symfony console make:entity Auteur
+   //  //  controller : symfony console make:controller Auteur                   
+   //  //  formulaire : symfony console make:form Commentaire
+
+
+
+   ----------------------------------------------------------------
+
+   - //vous allez créer une entité "Categorie" avec la propriété "nom"
+- //reliez cette entité à "Article" en faisant en sorte qu'un article puisse appartenir à une ou plusieurs categories
+- //créez un controlleur "Categories" afin de d'y ajouter une methode pour l'ajout d'une categories
+- //puis une methode pour la modification d'une categorie
+- //puis pour la suppression d'une categorie
+- //affichez la mliste des categories dans un tableau html avec une colonne pour le "nom" et une autres pour les actions "modifier-supprimer"
+-// affichez le formulaire puis ajoutez des categories en bdd
+- //modifiez le formulaire "ArticleType" afin d'avoir la possibilité d'affecter une ou plusieurs categories à l'article au moment de sa création
+- //affichez un sous menu de categories dans la page "allArticles.html.twig" 
+- //faites en sorte qu'en cliquant sur une categorie cela m'affiches les article de celle ci
+
+rappel : la création d'une relation se fait via la commande "symfony console make:entity Article" en y ajoutant une propriété "categories" et en choisissant la relation qui convient dans le type
+
+
+------------------------------------------------------------------------------------------------
+
+- créez une entité "Commentaire" avec les propriétés : (contenu text), (dateDeCreation datetime), (dateDeModification datetime nullable)
+
+- faite la relation entre Commentaire et Article, commentaire peut appartenir qu'à un seul article et un Article peut avoir plusieurs commentaire
+
+- faite la migration et verifier la bdd
+
+- créez un formualaire permettant d'ajouter un commentaire dans la bdd sachant que le fomulaire doit s'afficher sur la page oneArticle.html.twig en dessous de l'article
+

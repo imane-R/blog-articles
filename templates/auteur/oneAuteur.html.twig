@@ -1,0 +1,15 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}
+  Auteur
+{% endblock %}
+{% block content %}
+  <div class="card text-center" style="width: 40rem;">
+    <div class="card-body">
+      <h5 class="card-title">Nom et prenom : {{ auteur.nom }} {{ auteur.prenom }}</h5>
+      <h6 class="card-subtitle mb-2 text-muted">Date de naissance : {{ auteur.dateDeNaissance|date('d/m/Y \à H\\hi') }}</h6>
+      <p class="card-text">Biographie: {{ auteur.biographie }}.</p>
+      <a href="{{ path('app_auteurs') }}" class="btn btn-primary">Go back</a>
+    </div>
+  </div>
+{% endblock %}

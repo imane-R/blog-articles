@@ -1,0 +1,57 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}
+  Articles
+{% endblock %}
+{% block content %}
+  <nav class="nav">
+    <a class="nav-link active" aria-current="page" href="{{ path('app_articles') }}">All articles</a>
+
+    {% for categorie in categories %}
+      <a class="nav-link" href="{{ path('app_article_by_category', { slug: categorie.slug }) }}">{{ categorie.nom }}</a>
+    {% endfor %}
+  </nav>
+  {% if articles is empty %}
+    <div class="alert alert-info" role="alert">Pas d'articles dans cette catégorie</div>
+  {% else %}
+    <div class="row d-flex justify-content-center text-center">
+      {% for article in articles %}
+        {% set contenu = article.contenu|u.truncate(20, '...') %}
+        <div class="card m-1" style="width: 18rem;">
+          <div class="card-body">
+            <div>
+              <a href="{{ path('app_article_update', { id: article.id }) }}"><i class="fas fa-edit mx-1 text-success"></i></a>
+              <a href="{{ path('app_article_delete', { id: article.id }) }}" onClick="return confirm('etes vous sur de vouloir supprimer l\'article ')"><i class="fas fa-trash mx-1 text-danger"></i></a>
+            </div>
+
+            <h5 class="card-title">{{ article.titre }}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">crée le:{{ article.dateDeCreation|date('d/m/Y \à H\\hi') }}</h6>
+            {% if article.dateDeModification is not null %}
+              <h6 class="card-subtitle mb-2 text-muted">modifié le: {{ article.dateDeModification|date('d/m/Y \à H\\hi') }}</h6>
+            {% endif %}
+            {% if article.auteur is not null %}
+              <h6>auteur :{{ article.auteur.fullName }}</h6>
+            {% else %}
+              <h6>auteur : auteur anonyme</h6>
+            {% endif %}
+
+            {% if article.categories is not empty %}
+              <h6 class="text-muted">
+                categories:{% for categorie in article.categories %}
+                  {{ categorie.nom }}
+                  {% if loop.index < (article.categories|length) %}
+                    ,
+                  {% endif %}
+                {% endfor %}
+              </h6>
+            {% else %}
+              <h6>categorie : pas de categorie</h6>
+            {% endif %}
+            <p class="card-text">{{ contenu }}</p>
+            <a href="{{ path('app_article', { id: article.id }) }}" class="btn btn-primary card-link">lire l'article</a>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endblock %}

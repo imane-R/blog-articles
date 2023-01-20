@@ -1,0 +1,34 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}
+  Article
+{% endblock %}
+{% block content %}
+  <div class="row d-flex justify-content-center text-center">
+    <h1>{{ article.titre }}</h1>
+    <h6 class="text-muted">publié le : {{ article.dateDeCreation|date('d/m/Y \à H\\hi') }}</h6>
+    <h6 class="text-muted">modifié le :</h6>
+    {% if article.auteur is not null %}
+      <h6>auteur :{{ article.auteur.fullName }}</h6>
+    {% else %}
+      <h6>auteur : auteur anonyme</h6>
+    {% endif %}
+
+    <p>{{ article.contenu }}</p>
+  </div>
+  <div>
+    <h1>Ajout un commentaire</h1>
+    {{ form(formCommentaire) }}
+  </div>
+
+  {% for commentaire in article.commentaires %}
+    <div class="border-primary border rounded container mb-2">
+      <a href="{{ path('app_commentaire_update', { id: commentaire.id }) }}"><i class="fas fa-edit mx-1 text-success"></i></a>
+      <a href="{{ path('app_commentaire_delete', { id: commentaire.id }) }}" onClick="return confirm('etes vous sur de vouloir supprimer l\'article ')"><i class="fas fa-trash mx-1 text-danger"></i></a>
+      <h6>écrit par :</h6>
+
+      <h6 class="text-muted">le : {{ commentaire.dateDeCreation|date('d/m/Y \à H\\hi') }}</h6>
+      <p>{{ commentaire.contenu }}</p>
+    </div>
+  {% endfor %}
+{% endblock %}
